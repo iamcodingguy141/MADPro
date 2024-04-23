@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Code Embed</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .java-code {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .java-code textarea {
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Embed Java Code</h1>
+
+    <p>
+        Below is a section where you can add your Java code:
+    </p>
+
+    <div class="java-code">
+        <textarea id="javaCode" placeholder="Enter your Java code here...">
+
+            package com.example.welcome;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.Nullable;
+public class DatabaseHelper extends SQLiteOpenHelper {
+    String Database_Name="paruldatabase";
+    int Database_version=1;
+    //Table and column name
+    String Table_name="student";
+    String id="_id";
+    String column_name="name";
+    String column_mark ="mark";
+    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Create your table
+        String createTableQuery = "CREATE TABLE " + Table_name + "(" +
+       id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + column_name + " TEXT, " + column_mark + " INTEGER)";
+                db.execSQL(createTableQuery);
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //we will write when we require some logic
+    }
+}
+MainActivity.java
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Create an instance of your DBHelper
+        DatabaseHelper dbhelper = new DatabaseHelper(this, "paruldatabase", null, 1);
+            }
+}
+        </textarea>
+    </div>
+
+    <p>
+        You can add more content here or customize the layout as needed.
+    </p>
+
+</body>
+</html>
